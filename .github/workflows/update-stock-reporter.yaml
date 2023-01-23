@@ -21,11 +21,22 @@ jobs:
       id: checkout
       uses: actions/checkout@v3
     - name: Setup gitrows
-      run: |
-        npm install -g gitrows
-        gitrows config
+      run: npm i gitrows
     - name: Update stock reporters
-      run: gitrows add -f stock_dashboard_data.json -k $stock -c $channel -r $reporter
+      run: |
+        const gitrows = require('gitrows')
+        const data = {
+          key: inputs.stock,
+          channel: inputs.channel,
+          reporter: inputs.reporter
+        }
+        gitrows.put('stock_dashboard_data.json', data)
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     - name: Commit and push changes
       run: |
         git config --local user.email "action@github.com"
