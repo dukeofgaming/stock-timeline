@@ -1,0 +1,36 @@
+name: Update Stock Reporter
+
+on:
+  workflow_dispatch:
+    inputs:
+      stock:
+        description: 'Stock symbol'
+        required: true
+      channel:
+        description: 'Source channel'
+        required: true
+        options: ${{ steps.channels.outputs.channels | default([]) }}
+      reporter:
+        description: 'Reporter name'
+        required: true
+
+jobs:
+  update_stock_reporters:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      id: checkout
+      uses: actions/checkout@v3
+    - name: Setup gitrows
+      run: |
+        npm install -g gitrows
+        gitrows config
+    - name: Update stock reporters
+      run: gitrows add -f stock_dashboard_data.json -k $stock -c $channel -r $reporter
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add stock_dashboard_data.json
+        git commit -m "Add reporter $reporter to stock $stock"
+        git push
