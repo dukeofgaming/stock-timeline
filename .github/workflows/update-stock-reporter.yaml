@@ -9,7 +9,6 @@ on:
       channel:
         description: 'Source channel'
         required: true
-        options: ${{ steps.channels.outputs.channels | default([]) }}
       reporter:
         description: 'Reporter name'
         required: true
