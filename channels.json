@@ -1,0 +1,11 @@
+{
+    "youtube": {
+        "base_api_url": "https://www.youtube.com/api"
+    },
+    "twitter": {
+        "base_api_url": "https://api.twitter.com"
+    },
+    "yahooFinance": {
+        "base_api_url": "https://finance.yahoo.com/api"
+    }
+}

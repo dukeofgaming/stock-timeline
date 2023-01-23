@@ -1,0 +1,52 @@
+name: Remove Channel
+
+on:
+  workflow_dispatch:
+    inputs:
+      channel:
+        type: choice
+        description: 'Select the name of the channel'
+        required: true
+        options: ${{ steps.channels.outputs.channels | default([]).concat() }}
+      remove_from_stock_dashboard:
+        type: boolean
+        description: 'Remove all instances of this channel from the stock dashboard data document'
+        default: 'false'
+
+jobs:
+  remove_channel:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Install dependencies
+      run: |
+        apt-get update
+        apt-get install -y jq gitrows
+      
+    - name: Get channels
+      id: channels
+      run: |
+        options=$(cat channels.json | jq -r '.[]')
+        options=${options:-[]} # if options are empty, set it to an empty array "[]"
+        echo "::set-output name=channels::$options"
+        
+    - name: Remove channel
+      run: |
+        gitrows delete channels.json ${{ inputs.channel }}
+        if [ ${{ inputs.remove_from_stock_dashboard }} = true ]; then
+          gitrows delete stock_dashboard_data.json '.channels.'${inputs.channel}
+        fi
+        
+    - name: Commit changes
+      run: |
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "GitHub Actions"
+        git add channels.json
+        git commit -m "Remove channel ${{ inputs.channel }}"
+      
+    - name: Push changes
+      run: |
+        git push

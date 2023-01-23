@@ -1,0 +1,104 @@
+{
+    "TSLA": {
+        "channels": {
+            "youtube": {
+                "name": "channels",
+                "reporters": [
+                    "tesla",
+                    "elonmusk",
+                    "Model3Owners",
+                    "ModelSOwners",
+                    "ModelYOwners"
+                ]
+            },
+            "twitter": {
+                "name": "accounts",
+                "reporters": [
+                    "elonmusk",
+                    "Tesla",
+                    "TeslaMotors",
+                    "TeslaOwners",
+                    "TeslaModel3"
+                ]
+            },
+            "yahooFinance": {
+                "name": "analysts",
+                "reporters": [
+                    "DanIves",
+                    "AdamJonas",
+                    "ColinRusch",
+                    "ZachKirkhorn",
+                    "JeffKirsch"
+                ]
+            }
+        }
+    },
+    "NNDM": {
+        "channels": {
+            "youtube": {
+                "name": "channels",
+                "reporters": [
+                    "NNDM",
+                    "nanodiamonds",
+                    "nanodiamondtech",
+                    "NNDM_tech",
+                    "NNDM_investing"
+                ]
+            },
+            "twitter": {
+                "name": "accounts",
+                "reporters": [
+                    "NNDM",
+                    "nanodiamonds",
+                    "NNDMtech",
+                    "NNDM_news",
+                    "NNDM_stock"
+                ]
+            },
+            "yahooFinance": {
+                "name": "analysts",
+                "reporters": [
+                    "NNDMAnalyst",
+                    "NNDM_report",
+                    "NNDM_research",
+                    "NNDM_insight",
+                    "NNDM_forecast"
+                ]
+            }
+        }
+    },
+    "ARKK": {
+        "channels": {
+            "youtube": {
+                "name": "channels",
+                "reporters": [
+                    "ARKInvest",
+                    "ARKETF",
+                    "ARK_Research",
+                    "ARK_Innovation",
+                    "ARK_Investing"
+                ]
+            },
+            "twitter": {
+                "name": "accounts",
+                "reporters": [
+                    "ArkInvest",
+                    "CathieDWood",
+                    "ARK_ETF",
+                    "ARK_Research",
+                    "ARK_Innovation"
+                ]
+            },
+            "yahooFinance": {
+                "name": "analysts",
+                "reporters": [
+                    "ARKAnalyst",
+                    "ARK_report",
+                    "ARK_research",
+                    "ARK_insight",
+                    "ARK_forecast"
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,31 @@
+name: Remove Stock Reporters
+
+on:
+  workflow_dispatch:
+    inputs:
+      stock_symbol:
+        description: 'Enter the stock symbol (e.g. TSLA, NNDM, ARKK)'
+        required: true
+      channel:
+        description: 'Enter the name of the channel (e.g. youtube, twitter, yahooFinance)'
+        required: true
+      reporter:
+        description: 'Enter the name of the reporter'
+        required: true
+
+jobs:
+  remove_reporters:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    
+    - name: Install dependencies
+      run: |
+        npm install gitrows
+        npm install git
+        
+    - name: Remove stock reporters
+      run: |
+        gitrows --remove_reporter --stock_symbol=${inputs.stock_symbol} --channel=${inputs.channel} --reporter=${inputs.reporter}
