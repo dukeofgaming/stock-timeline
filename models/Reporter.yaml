@@ -1,0 +1,7 @@
+title: Reporter
+x-stoplight:
+  id: pxnovibpznl5m
+type: object
+properties:
+  name:
+    type: string

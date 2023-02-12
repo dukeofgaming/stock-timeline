@@ -1,0 +1,9 @@
+title: ReporterChannelStock
+x-stoplight:
+  id: 1s8gohqbutjkg
+type: object
+properties:
+  reporter_channel:
+    $ref: ./ReporterChannel.yaml
+  stock:
+    $ref: ./Stock.yaml

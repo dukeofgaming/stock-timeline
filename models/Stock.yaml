@@ -1,0 +1,9 @@
+title: Stock
+x-stoplight:
+  id: 9tb06h3xubfwr
+type: object
+properties:
+  symbol:
+    type: string
+  name:
+    type: string

@@ -1,0 +1,12 @@
+title: ReporterChannel
+x-stoplight:
+  id: mw9l3cb0lufs9
+type: object
+x-internal: false
+properties:
+  reporter:
+    $ref: ./Reporter.yaml
+  channel:
+    $ref: ./Channel.yaml
+  reporter_channel_name:
+    type: string
