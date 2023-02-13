@@ -1,0 +1,25 @@
+openapi: 3.0.0
+x-stoplight:
+  id: gohc0to9gty6r
+info:
+  title: stock-timeline
+  version: '1.0'
+  description: Track who is covering your favorite stocks
+  contact:
+    name: David Vega
+    url: '@dukeofgaming'
+servers:
+  - url: 'http://localhost:3000'
+paths: {}
+components:
+  schemas:
+    Reporter:
+      $ref: ../Entities/Reporter.yaml
+    Channel:
+      $ref: ../Entities/Channel.yaml
+    Stock:
+      $ref: ../Entities/Stock.yaml
+    ReporterChannel:
+      $ref: ../Entities/ReporterChannel.yaml
+    ReporterChannelStock:
+      $ref: ../Entities/ReporterChannelStock.yaml

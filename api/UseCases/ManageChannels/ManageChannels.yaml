@@ -1,0 +1,18 @@
+openapi: 3.0.0
+x-stoplight:
+  id: xun54zssfttq9
+info:
+  title: ManageChannels
+  description: Add & remove channels
+  version: '1.0'
+  contact: 
+    name: David Vega
+    url: '@dukeofgaming'
+
+servers:
+  - url: 'http://localhost:3000'
+paths: {}
+components:
+  schemas:
+    Channel:
+      $ref: ../../Entities/Channel.yaml
