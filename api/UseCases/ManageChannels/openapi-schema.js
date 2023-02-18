@@ -76,11 +76,11 @@ class OpenAPISchema {
 
         }
 
-        // try {
-        //     return JSON.parse(schema_string);
-        // } catch (error) {
+        try {
+            return JSON.parse(schema_string);
+        } catch (error) {
             return yaml.load(schema_string);
-        // }
+        }
 
         
         // this.schema = typeof this.schema === 'string'
@@ -99,12 +99,45 @@ class OpenAPISchema {
         
         this.validateOptions(['data', 'schema']);
 
+        const ajv = new Ajv();
 
-        return new Ajv().compile(
-            await this.parse(
-                schema
-            )
-        ).validate(data);
+        if (typeof schema === 'string') {
+            
+            try {
+                const openapi = yaml.load(fs.readFileSync(schema, this.options.encoding));
+                const schemas = openapi.components.schemas;
+
+                console.log(schemas);
+                console.log(typeof schemas);
+
+
+                Object.entries(schemas).forEach(([name, definition]) => {
+                    console.log(name)
+                    console.log(definition)
+                    
+                    ajv.addSchema(definition, name);
+                });
+
+            } catch (error) {
+                throw new Error(`Error reading schema file: ${error}`);
+            }
+
+        } else {
+            ajv.addSchema(schema);
+        }
+
+        const validate = ajv.compile(schema);
+        const valid = validate(this.options.data);
+        
+        if (!valid) {
+            throw new Error(ajv.errorsText(validate.errors));
+        }
+
+        // return new Ajv().compile(
+        //     await this.parse(
+        //         schema
+        //     )
+        // ).validate(data);
     }
 }
 

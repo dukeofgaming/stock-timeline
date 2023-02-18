@@ -15,4 +15,4 @@ paths: {}
 components:
   schemas:
     Channel:
-      $ref: ../../Entities/Channel.yaml
+      $ref: ./Channel.yaml

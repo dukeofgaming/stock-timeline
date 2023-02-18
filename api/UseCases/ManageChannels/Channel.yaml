@@ -1,0 +1,11 @@
+title: Channel
+x-stoplight:
+  id: 7ruyxm0due21g
+type: object
+properties:
+  id:
+    type: string
+  name:
+    type: string
+  base_url:
+    type: string
