@@ -7,5 +7,9 @@ properties:
     type: string
   name:
     type: string
-  base_url:
+  api_url:
     type: string
+required:
+  - id
+  - name
+  - api_url
