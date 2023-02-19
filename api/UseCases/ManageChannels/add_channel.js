@@ -11,8 +11,8 @@ const yaml  = require("js-yaml");
 
 // OpenAPI Schema Parsing
 // TODO: REMOVE? - const OpenAPISchema = require('./openapi-schema');
-const openapiSchemaValidator = require('openapi-schema-validator');
-const Ajv = require("ajv");
+const Ajv                       = require("ajv");
+const openapiSchemaValidator    = require('openapi-schema-validator');
 
 // async function parseSchemas(openapi_file) {
     //     const parser = new OpenAPIParser();
@@ -52,11 +52,13 @@ console.log(cli_args);
 let gitrows_persistance_file = '@github/dukeofgaming/stock-timeline/channels.json';
 // let gitrows_persistance_file = '@github/dukeofgaming/stock-timeline/api/UseCases/ManageChannels/ManageChannels.yaml';
 let schema_file = './Channel.yaml';
+const branch = 'develop';
 
 const gitrows = new Gitrows({
     token   : process.env.GH_TOKEN,
     user    : process.env.GH_USER,
-    path    : gitrows_persistance_file
+    path    : gitrows_persistance_file,
+    branch  : branch,
 });
 
 
@@ -90,7 +92,9 @@ try{
             
             if (!valid) {
                 //   throw new Error(ajv.errorsText(validate.errors));
-                console.log(ajv.errorsText(validate.errors));
+                console.log(
+                    ajv.errorsText(validate.errors)
+                );
             }
             
             console.log(valid);
