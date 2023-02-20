@@ -51,13 +51,12 @@ console.log(cli_args);
 
 let gitrows_persistance_file = '@github/dukeofgaming/stock-timeline/channels.json';
 // let gitrows_persistance_file = '@github/dukeofgaming/stock-timeline/api/UseCases/ManageChannels/ManageChannels.yaml';
-let schema_file = './Channel.yaml';
+let schema_file = '../../Entities/Channel.yaml';
 const branch = 'develop';
 
 const gitrows = new Gitrows({
     token   : process.env.GH_TOKEN,
     user    : process.env.GH_USER,
-    path    : gitrows_persistance_file,
     branch  : branch,
 });
 
@@ -71,9 +70,13 @@ try{
     
     gitrows.get(gitrows_persistance_file).then(
         (gitrows_data) => {
-            console.log('Method success:');
+            console.log('Data found success:');
             console.log(gitrows_data);
             
+            //Check if gitworks_data is null
+            if(gitrows_data == null){
+                throw new Error('No data found');
+            }
             
             const openapi_schema = yaml.load(
                 fs.readFileSync(
@@ -100,20 +103,13 @@ try{
             console.log(valid);
             console.log(typeof valid);
             
-            // openapiSchemaValidator.validate(schema, channels, (error) => {
-                //     if (error) {
-            //         console.error(error);
-            //     } else {
-            //         console.log('Data is valid against the OpenAPI schema.');
-            //     }
-            // });
 
 
 
         }
     ).catch(
         (err) => {
-            console.log('Method error:');
+            console.log('Could not read from file:');
             console.log(err);
         }
     );
@@ -131,25 +127,25 @@ try{
     
 
 
-    // gitrows.put(
-    //     path, 
-    //     {
-    //         id          : cli_args.id,
-    //         name        : cli_args.name,
-    //         base_url    : cli_args.base_url
-    //     }
+    gitrows.put(
+        gitrows_persistance_file, 
+        {
+            id          : cli_args.id,
+            name        : cli_args.name,
+            base_url    : cli_args.base_url
+        }
     
-    // ).catch(
-    //     (err) => {
-    //         console.log('Method error:');
-    //         console.log(err);
-    //     }
-    // ).then(
-    //     (res) => {
-    //         console.log('Method success:');
-    //         console.log(res);
-    //     }
-    // );
+    ).catch(
+        (err) => {
+            console.log('Could not write to file:');
+            console.log(err);
+        }
+    ).then(
+        (res) => {
+            console.log('Method success:');
+            console.log(res);
+        }
+    );
 
 }catch(err){
     console.log('Class error' + err);
